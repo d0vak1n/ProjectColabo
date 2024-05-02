@@ -1,5 +1,4 @@
 import * as React from 'react';
-import { styled, alpha } from '@mui/material/styles';
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
 import Toolbar from '@mui/material/Toolbar';
@@ -8,7 +7,6 @@ import Typography from '@mui/material/Typography';
 import Badge from '@mui/material/Badge';
 import MenuItem from '@mui/material/MenuItem';
 import Menu from '@mui/material/Menu';
-import MenuIcon from '@mui/icons-material/Menu';
 import AccountCircle from '@mui/icons-material/AccountCircle';
 import MailIcon from '@mui/icons-material/Mail';
 import NotificationsIcon from '@mui/icons-material/Notifications';
@@ -17,6 +15,7 @@ import MessageIcon from './menucomponents/MessageIcon';
 import Notifications from './menucomponents/Notifications';
 import UserBadge from './menucomponents/UserBadge';
 import SearchBar from './menucomponents/SearchBar';
+import ShowNavButton from './menucomponents/ShowNavButton';
 
 export default function TopMenu() {
   const [anchorEl, setAnchorEl] = React.useState(null);
@@ -120,22 +119,14 @@ export default function TopMenu() {
     <Box sx={{ flexGrow: 1 }}>
       <AppBar position="static">
         <Toolbar>
-          <IconButton
-            size="large"
-            edge="start"
-            color="inherit"
-            aria-label="open drawer"
-            sx={{ mr: 2 }}
-          >
-            <MenuIcon />
-          </IconButton>
+          <ShowNavButton />
           <Typography
             variant="h6"
             noWrap
             component="div"
             sx={{ display: { xs: 'none', sm: 'block' } }}
           >
-            MUI
+            ProjectColabo
           </Typography>
           <SearchBar />
           <Box sx={{ flexGrow: 1 }} />
