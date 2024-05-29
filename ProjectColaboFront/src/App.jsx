@@ -1,13 +1,20 @@
 import './App.css'
-import TopMenu from './components/nav/TopMenu.jsx'
+import RouteError from './components/nav/views/RouteError.jsx'
+import Home from './components/nav/views/home/Home.jsx'
+import Profile from './components/nav/views/profile/Profile.jsx'
+import { Routes, Route, BrowserRouter } from 'react-router-dom'
 
 function App() {
 
   return (
     <>
-
-    <TopMenu />
-
+        <BrowserRouter>
+        <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/perfil" element={<Profile />} />
+            <Route path="*" element={ <RouteError /> } />
+        </Routes>
+        </BrowserRouter>
     </>
   )
 }

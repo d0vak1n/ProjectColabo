@@ -11,11 +11,11 @@ import AccountCircle from '@mui/icons-material/AccountCircle';
 import MailIcon from '@mui/icons-material/Mail';
 import NotificationsIcon from '@mui/icons-material/Notifications';
 import MoreIcon from '@mui/icons-material/MoreVert';
-import MessageIcon from './menucomponents/MessageIcon';
-import Notifications from './menucomponents/Notifications';
-import UserBadge from './menucomponents/UserBadge';
-import SearchBar from './menucomponents/SearchBar';
-import ShowNavButton from './menucomponents/ShowNavButton';
+import MessageIcon from './menuComponents/MessageIcon';
+import Notifications from './menuComponents/Notifications';
+import UserBadge from './menuComponents/UserBadge';
+import SearchBar from './menuComponents/SearchBar';
+import ShowNavButton from './menuComponents/ShowNavButton';
 
 export default function TopMenu() {
   const [anchorEl, setAnchorEl] = React.useState(null);
