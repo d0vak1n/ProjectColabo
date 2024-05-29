@@ -8,13 +8,13 @@ function App() {
 
   return (
     <>
-        <BrowserRouter>
+      <BrowserRouter>
         <Routes>
-            <Route path="/" element={<Home />} />
-            <Route path="/perfil" element={<Profile />} />
-            <Route path="*" element={ <RouteError /> } />
+          <Route path="/" element={<Home />} />
+          <Route path="/perfil" element={<Profile />} />
+          <Route path="*" element={<RouteError />} />
         </Routes>
-        </BrowserRouter>
+      </BrowserRouter>
     </>
   )
 }
