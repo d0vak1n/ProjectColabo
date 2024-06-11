@@ -2,12 +2,6 @@ import { ListItemIcon, ListItem, ListItemButton, ListItemText} from "@mui/materi
 import PropTypes from 'prop-types';
 import { useNavigate } from "react-router-dom";
 
-ListItemMenu.propTypes = {
-    text: PropTypes.string.isRequired,
-    icon: PropTypes.elementType.isRequired,
-    to: PropTypes.string.isRequired,
-}
-
 export default function ListItemMenu( {text, icon, to} ) {
     const navigate = useNavigate();
     return (
@@ -20,4 +14,10 @@ export default function ListItemMenu( {text, icon, to} ) {
             </ListItem>
         </>
     )
+}
+
+ListItemMenu.propTypes = {
+    text: PropTypes.string.isRequired,
+    icon: PropTypes.elementType.isRequired,
+    to: PropTypes.string.isRequired,
 }
