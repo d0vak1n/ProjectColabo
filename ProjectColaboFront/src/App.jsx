@@ -1,5 +1,4 @@
 import { useState } from 'react'
-import './App.css'
 import RouteError from './components/nav/views/RouteError.jsx'
 import Home from './components/nav/views/home/Home.jsx'
 import Profile from './components/nav/views/profile/Profile.jsx'
