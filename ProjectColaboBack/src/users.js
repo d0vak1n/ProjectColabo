@@ -1,5 +1,6 @@
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
+var db = require('./dbconnection');
 
 const users = []; // This should be replaced with a real database in production
 
