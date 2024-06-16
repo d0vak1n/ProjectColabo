@@ -9,5 +9,5 @@ export default defineConfig({
       cachedChecks: false
     }
   },
-  base: "https://d0vak1n.github.io/ProjectColabo"
+  base: "/ProjectColabo/",
 })
