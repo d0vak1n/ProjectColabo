@@ -8,9 +8,8 @@ function Copyright(props) {
   return (
     <Typography variant="body2" color="text.secondary" align="center" {...props}>
       {'Copyright © '}
-      <Link color="inherit" href="https://mui.com/">
-        Your Website
-      </Link>{' '}
+        ProjectColabo
+        {' '}
       {new Date().getFullYear()}
       {'.'}
     </Typography>
@@ -45,7 +44,6 @@ const Register = () => {
     } else {
       setPasswordError(false);
     }
-
 
     try {
       await axios.post('http://localhost:5000/register', { email, password, firstName, lastName, linkedin, github });
@@ -159,7 +157,7 @@ const Register = () => {
           <Grid container justifyContent="flex-end">
             <Grid item>
               <Link component="button" onClick={() => { navigate("/login") }} variant="body2">
-                Already have an account? Sign in
+                ¿Ya tienes una cuenta? Loguéate
               </Link>
             </Grid>
           </Grid>
