@@ -8,8 +8,8 @@ function Copyright(props) {
   return (
     <Typography variant="body2" color="text.secondary" align="center" {...props}>
       {'Copyright © '}
-        ProjectColabo
-        {' '}
+      ProjectColabo
+      {' '}
       {new Date().getFullYear()}
       {'.'}
     </Typography>
@@ -29,7 +29,14 @@ const Register = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    
+
+    // Comprobación de campos vacíos
+    if (!email || !password || !firstName || !lastName || !linkedin || !github) {
+      alert('Por favor, rellena todos los campos');
+      return;
+    }
+
+    //Comprobar patron de email correcto
     const emailRegex = /^[\w-]+(\.[\w-]+)*@([\w-]+\.)+[a-zA-Z]{2,7}$/;
     if (!emailRegex.test(email)) {
       setEmailError(true);
@@ -38,11 +45,30 @@ const Register = () => {
       setEmailError(false);
     }
 
-    if (password.length > 8 && password.length < 25) {
+    // Comprobar longitud de contraseña
+    if (password.length > 25) {
       setPasswordError(true);
       return;
     } else {
       setPasswordError(false);
+    }
+
+    // Comprobar si la contraseña contiene al menos un número, una mayuscula, una minuscula y un caracter especial
+    const numberRegex = /\d/;
+    const uppercaseRegex = /[A-Z]/;
+    const lowercaseRegex = /[a-z]/;
+    const specialCharRegex = /[!@#$%^&*(),.?":{}|<>]/;
+    if (!numberRegex.test(password) || !uppercaseRegex.test(password) || !lowercaseRegex.test(password) || !specialCharRegex.test(password)) {
+      setPasswordError(true);
+      return;
+    } else {
+      setPasswordError(false);
+    }
+
+    // Comprobación de campos vacíos
+    if (!email || !password || !firstName || !lastName || !linkedin || !github) {
+      alert('Por favor, rellena todos los campos');
+      return;
     }
 
     try {
@@ -70,7 +96,7 @@ const Register = () => {
         <Typography component="h1" variant="h5">
           Registro
         </Typography>
-        <Box component="form" noValidate onSubmit={handleSubmit} sx={{ mt: 3 }}>
+        <Box component="form" onSubmit={handleSubmit} sx={{ mt: 3 }}>
           <Grid container spacing={2}>
             <Grid item xs={12} sm={6}>
               <TextField
@@ -111,7 +137,7 @@ const Register = () => {
                 label="Contraseña"
                 type="password"
                 error={passwordError}
-                helperText={passwordError ? 'La contraseña debe tener al menos 8 caracteres' : ''}
+                helperText={passwordError ? 'La contraseña debe tener al menos 8 caracteres, una letra mayuscula y minuscula; un número y un caracter especial \n (!@#$%^&*(),.?":{}|<>)' : ''}
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
                 autoComplete="new-password"
@@ -121,8 +147,7 @@ const Register = () => {
               <TextField
                 required
                 fullWidth
-                label="URL perfil de linkedin"
-                type="url"
+                label="Linkedin profile name"
                 value={linkedin}
                 onChange={(e) => setLinkedin(e.target.value)}
                 autoComplete="new-password"
@@ -132,8 +157,7 @@ const Register = () => {
               <TextField
                 required
                 fullWidth
-                label="URL perfil de github"
-                type="url"
+                label="Github profile name"
                 value={github}
                 onChange={(e) => setGithub(e.target.value)}
                 autoComplete="new-password"
