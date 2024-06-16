@@ -29,7 +29,7 @@ const Login = ({ setToken }) => {
         try {
             const response = await axios.post('http://localhost:5000/login', { email, password });
             setToken(response.data.token);
-            //navigate('/');
+            navigate('/');
         } catch (error) {
             alert('There was an error logging in!', error);
         }
