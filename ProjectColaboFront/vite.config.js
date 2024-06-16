@@ -8,5 +8,6 @@ export default defineConfig({
     fs: {
       cachedChecks: false
     }
-  }
+  },
+  base: "https://d0vak1n.github.io/ProjectColabo"
 })
