@@ -1,0 +1,29 @@
+GET https://rickandmortyapi.com/api HTTP/1.1
+
+###
+
+POST http://localhost:5000/login HTTP/1.1
+
+{ 
+    email: "cipollo@cipollo.com", 
+    password: "Aa@123456"
+}
+
+###
+
+POST http://localhost:5000/register HTTP/1.1
+
+content-type: application/json
+
+{ 
+    email: "rulanca@gmail.com", 
+    password: "Rr@777777744", 
+    firstName: "Rau", 
+    lastName: "mora", 
+    linkedin: "manolo", 
+    github: "tuvieja" 
+}
+
+###
+
+POST https://example.com/comments HTTP/1.1
