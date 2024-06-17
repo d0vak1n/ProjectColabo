@@ -11,6 +11,10 @@ POST http://localhost:5000/login HTTP/1.1
 
 ###
 
+GET http://localhost:5000/projects HTTP/1.1
+
+###
+
 POST http://localhost:5000/register HTTP/1.1
 
 content-type: application/json
