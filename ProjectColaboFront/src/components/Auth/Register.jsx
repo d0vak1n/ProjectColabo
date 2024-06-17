@@ -72,10 +72,13 @@ const Register = () => {
     }
 
     try {
-      await axios.post('http://localhost:5000/register', { email, password, firstName, lastName, linkedin, github });
-      alert('User registered successfully');
+      const userData = { email, password, firstName, lastName, linkedin, github };
+      console.log(userData); // Log the user data
+      const response = await axios.post('http://localhost:5000/register', userData);
+      console.log(response.data); // Log the response data
+      alert('Usuario registrado correctamente');
     } catch (error) {
-      alert('There was an error registering!', error);
+      alert(`¡Error en el registro! ${error.response.data}`);
     }
   };
 

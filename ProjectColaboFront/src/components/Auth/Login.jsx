@@ -45,10 +45,12 @@ const Login = ({ setToken }) => {
 
     try {
       const response = await axios.post('http://localhost:5000/login', { email, password });
-      setToken(response.data.token);
+      const token = response.data.token;
+      document.cookie = `token=${token}; path=/`;
+      setToken(token)
       navigate('/');
     } catch (error) {
-      alert('There was an error logging in!', error);
+      alert(`Ha habido un error ${error.response.data}`);
     }
   };
 

@@ -2,6 +2,7 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const cors = require('cors');
 const users = require('./src/users');
+const projects = require('./src/functions/projects');
 require('dotenv').config()
 
 const app = express();
@@ -12,8 +13,7 @@ app.use(cors());
 
 app.post('/register', users.register);
 app.post('/login', users.login);
-
-
+app.get('/projects', projects.getProjects);
 
 app.listen(PORT, () => {
   console.log(`Server running on http://localhost:${PORT}`);
