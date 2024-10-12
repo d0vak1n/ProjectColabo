@@ -50,7 +50,7 @@ const Login = ({ setToken }) => {
       setToken(token)
       navigate('/');
     } catch (error) {
-      alert(`Ha habido un error ${error.response.data}`);
+      alert(`Ha habido un error: ${error.response.data}`);
     }
   };
 

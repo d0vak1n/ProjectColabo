@@ -20,7 +20,7 @@ export default function Home() {
     return (
         <>
             <TopMenu />
-            <Grid container spacing={3}>
+            <Grid container spacing={3} style={{ marginTop: '10px', marginLeft: '20px' }}>
                 {projects.map(project => (
                     <Grid item xs={12} sm={6} md={4} lg={3} key={project.id}>
                         <CardProject title={project.titulo} description={project.descripcion} created_at={project.fecha_creacion} githuburl={project.githubproj} creator_name={project.nombre + " " + project.apellido} />
