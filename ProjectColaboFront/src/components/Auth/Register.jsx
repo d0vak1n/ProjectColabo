@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { TextField, Button, Container, Grid, Link, Typography, Box, Avatar, FormControlLabel, Checkbox } from '@mui/material';
+import { TextField, Button, Container, Grid, Link, Typography, Box, Avatar, FormControlLabel, Checkbox, Tooltip } from '@mui/material';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
@@ -133,17 +133,20 @@ const Register = () => {
               />
             </Grid>
             <Grid item xs={12}>
-              <TextField
-                required
-                fullWidth
-                label="Contraseña"
-                type="password"
-                error={passwordError}
-                helperText={passwordError ? 'La contraseña debe tener al menos 8 caracteres, una letra mayuscula y minuscula; un número y un caracter especial \n (!@#$%^&*(),.?":{}|<>)' : ''}
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-                autoComplete="new-password"
-              />
+              <Tooltip title="La contraseña debe tener al menos 8 caracteres, una letra mayuscula y minuscula; un número y un caracter especial (!@#$%^&*(),.?">
+                <TextField
+                  required
+                  fullWidth
+                  label="Contraseña"
+                  type="password"
+                  error={passwordError}
+                  helperText={passwordError ? 'La contraseña debe tener al menos 8 caracteres, una letra mayuscula y minuscula; un número y un caracter especial \n (!@#$%^&*(),.?":{}|<>)' : ''}
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
+                  autoComplete="new-password"
+                  to
+                />
+              </Tooltip>
             </Grid>
             <Grid item xs={12}>
               <TextField
