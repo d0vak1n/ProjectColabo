@@ -4,7 +4,7 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node index.js"
+    "start": "ts-node index.ts"
   },
   "author": "d0vak1n",
   "license": "ISC",
@@ -26,6 +26,7 @@
     "@types/jsonwebtoken": "^9.0.7",
     "@types/mysql": "^2.15.26",
     "@types/node": "^22.7.8",
+    "ts-node": "^10.9.2",
     "typescript": "^5.6.3"
   }
 }
