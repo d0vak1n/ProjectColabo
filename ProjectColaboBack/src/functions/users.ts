@@ -3,18 +3,9 @@ import jwt from 'jsonwebtoken';
 import db from './dbconnection';
 import dotenv from 'dotenv';
 import { Request, Response } from 'express';
+import { User } from './interface';
 
 dotenv.config();
-
-interface User {
-  id: number;
-  nombre: string;
-  apellido: string;
-  email: string;
-  password: string;
-  github: string;
-  linkedin: string;
-}
 
 const register = async (req: Request, res: Response): Promise<void> => {
   const { email, password, firstName, lastName, linkedin, github } = req.body;
