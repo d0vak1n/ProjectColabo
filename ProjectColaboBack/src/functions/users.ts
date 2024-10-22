@@ -1,15 +1,20 @@
-const bcrypt = require('bcryptjs');
-const jwt = require('jsonwebtoken');
-var db = require('./dbconnection');
-require('dotenv').config()
+import { Request, Response } from 'express';
+import bcrypt from 'bcryptjs';
+import jwt from 'jsonwebtoken';
+import db from './dbconnection';
+import dotenv from 'dotenv';
 
-const register = async (req, res) => {
+dotenv.config();
+
+const register = async (req: Request, res: Response): Promise<void> => {
   const { email, password, firstName, lastName, linkedin, github } = req.body;
 
-  // Comprovamos si el email ya ha sido registrado
+  // Comprobamos si el email ya ha sido registrado
   db.query('SELECT * FROM estudiantes WHERE email = ?', [email], async (error, results) => {
     if (error) {
       console.log(error);
+      res.status(500).send('Error al consultar la base de datos');
+      return;
     }
 
     if (results.length > 0) {
@@ -17,9 +22,10 @@ const register = async (req, res) => {
     } else {
       const hashedPassword = await bcrypt.hash(password, 10);
 
-      db.query('INSERT INTO estudiantes SET ?', { email: email, password: hashedPassword, nombre: firstName, apellido: lastName, github: github, linkedin: linkedin }, (error, results) => {
+      db.query('INSERT INTO estudiantes SET ?', { email, password: hashedPassword, nombre: firstName, apellido: lastName, github, linkedin }, (error, results) => {
         if (error) {
           console.log(error);
+          return res.status(500).send('Error al insertar el usuario');
         } else {
           console.log(results);
           res.status(201).send('Usuario registrado correctamente');
@@ -29,7 +35,7 @@ const register = async (req, res) => {
   });
 };
 
-const login = async (req, res) => {
+const login = async (req: Request, res: Response): Promise<void> => {
   const { email, password } = req.body;
 
   db.query('SELECT * FROM estudiantes WHERE email = ?', [email], async (error, results) => {
@@ -48,20 +54,22 @@ const login = async (req, res) => {
       return res.status(401).send('Correo y/o contraseña incorrectos');
     }
 
-    const token = jwt.sign({ email: user.email }, process.env.SECRET);
+    const token = jwt.sign({ email: user.email }, process.env.SECRET as string);
     res.json({ token });
   });
 };
 
-const getUserData = async (req, res) => {
+const getUserData = async (req: Request, res: Response): Promise<void> => {
   // Obtén el token del header de la solicitud
   const token = req.headers['authorization'];
 
-  if (!token) {
+    res.status(401).send('Token no proporcionado');
+    return;
     return res.status(401).send('Token no proporcionado');
   }
 
-  const tokenParts = token.split(' ');
+    res.status(401).send('Token inválido');
+    return;
   if (tokenParts.length !== 2 || tokenParts[0] !== 'Bearer') {
     return res.status(401).send('Token inválido');
   }
@@ -69,7 +77,7 @@ const getUserData = async (req, res) => {
   const extractedToken = tokenParts[1];
 
   // Verifica el token
-  jwt.verify(extractedToken, process.env.SECRET, async (err, decoded) => {
+  jwt.verify(extractedToken, process.env.SECRET as string, async (err, decoded: any) => {
     if (err) {
       return res.status(401).send('Token inválido');
     }
@@ -79,7 +87,8 @@ const getUserData = async (req, res) => {
       if (error) {
         console.log(error);
         return res.status(500).send('Error al consultar la base de datos');
-      }
+        res.status(404).send('Usuario no encontrado');
+        return;
 
       if (results.length === 0) {
         return res.status(404).send('Usuario no encontrado');
@@ -99,4 +108,4 @@ const getUserData = async (req, res) => {
   });
 };
 
-module.exports = { register, login, getUserData };
+export { register, login, getUserData };

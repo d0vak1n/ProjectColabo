@@ -1,5 +1,4 @@
 import express, { Application, Request, Response } from 'express';
-import bodyParser from 'body-parser';
 import cors from 'cors';
 import users from './src/functions/users';
 import projects from './src/functions/projects';
