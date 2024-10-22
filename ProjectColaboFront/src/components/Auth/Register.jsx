@@ -133,7 +133,7 @@ const Register = () => {
               />
             </Grid>
             <Grid item xs={12}>
-              <Tooltip title="La contraseña debe tener al menos 8 caracteres, una letra mayuscula y minuscula; un número y un caracter especial (!@#$%^&*(),.?">
+              <Tooltip placement='right' title="La contraseña debe tener al menos 8 caracteres, una letra mayuscula y minuscula; un número y un caracter especial (!@#$%^&*(),.?">
                 <TextField
                   required
                   fullWidth
