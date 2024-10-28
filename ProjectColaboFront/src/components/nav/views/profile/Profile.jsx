@@ -42,7 +42,7 @@ export default function Profile() {
             <Typography variant="body1">Nombre: {userData.nombre}</Typography>
             <Typography variant="body1">Apellido: {userData.apellido}</Typography>
             <Typography variant="body1">Email: {userData.email}</Typography>
-            <Typography variant="body1">Github: <Link href={"" + userData.github} target="_blank" rel="noopener noreferrer">{userData.github}</Link></Typography>
+            <Typography variant="body1">Github: <Link href={"https://github.com/" + userData.github} target="_blank" rel="noopener noreferrer">{userData.github}</Link></Typography>
             <Typography variant="body1">LinkedIn: <Link href={"https://www.linkedin.com/in/" + userData.linkedin} target="_blank" rel="noopener noreferrer">{userData.linkedin}</Link></Typography>
         </>
     )

@@ -1,3 +1,6 @@
+CREATE DATABASE IF NOT EXISTS projectcolabo;
+USE projectcolabo;
+
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
 SET time_zone = "+00:00";
@@ -40,7 +43,7 @@ CREATE TABLE `estudiantes_proyectos` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 INSERT INTO `estudiantes` (`id`, `nombre`, `apellido`, `email`, `password`, `github`, `linkedin`) VALUES
-(666, 'Raul', 'Moreno', 'raul@gmail.com', 'Aa@123456', 'd0vak1n', 'raulmor');
+(666, 'Raul', 'Moreno', 'test@test.com', '$2a$10$6VOAfYbkGUl2vTS1POOmtezOxGRIYVh7/nYNkKIPxw2hYW0EdYc6O', 'd0vak1n', 'raulmor');
 
 INSERT INTO `proyectos` (`id`, `titulo`, `descripcion`, `fecha_creacion`, `creador_id`, `githubproj`) VALUES
 (111, 'ProjectColabo', 'A wan caballo blanco caballo negroorl ahorarr se calle ustée diodeno apetecan. Torpedo me cago en tus muelas apetecan llevame al sircoo diodenoo llevame al sircoo diodenoo fistro fistro a gramenawer. Mamaar pecador va usté muy cargadoo benemeritaar quietooor diodeno. Está la cosa muy malar pecador ese que llega pupita va usté muy cargadoo está la cosa muy malar ese hombree te voy a borrar el cerito sexuarl mamaar mamaar. Tiene musho peligro a wan por la gloria de mi madre pupita qué dise usteer. Llevame al sircoo pecador al ataquerl mamaar apetecan condemor. Condemor hasta luego Lucas a gramenawer fistro fistro tiene musho peligro te voy a borrar el cerito no puedor fistro sexuarl por la gloria de mi madre. Diodenoo está la cosa muy malar torpedo benemeritaar torpedo. ', '2024-06-17 11:19:13', 666, 'https://github.com/d0vak1n/ProjectColabo'),
