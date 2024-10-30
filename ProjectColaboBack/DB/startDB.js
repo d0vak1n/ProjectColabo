@@ -19,6 +19,9 @@ con.connect(function (err) {
     var queries = sql.split(';');
 
     var queryPromise = function(query) {
+        if (!query) {
+            return Promise.resolve();
+        }
         return new Promise(function(resolve, reject) {
             con.query(query, function(err, result) {
                 if (err) {
