@@ -1,5 +1,6 @@
 var mysql = require('mysql2');
 var fs = require('fs');
+const path = require('path');
 require('dotenv').config({ path: '../.env' });
 
 var con = mysql.createConnection({
@@ -14,7 +15,8 @@ con.connect(function (err) {
     }
     console.log("Conectado!");
 
-    var sql = fs.readFileSync('./ProjectColabo.sql').toString();
+    const sqlFilePath = path.resolve(__dirname, 'ProjectColabo.sql');
+    const sql = fs.readFileSync(sqlFilePath).toString();
 
     var queries = sql.split(';');
 
@@ -39,10 +41,13 @@ con.connect(function (err) {
     Promise.all(promises)
         .then(function() {
             console.log("Todas las consultas se han completado");
-            con.end();
+            console.log("Cierre el programa con Ctrl+C y vuelva a ejecutarlo para arrancar el servidor");
         })
         .catch(function(err) {
             console.error(err.message);
+        })
+        .finally(function() {
             con.end();
+            process.exit(0);
         });
 });
