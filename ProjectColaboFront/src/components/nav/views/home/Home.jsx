@@ -2,7 +2,8 @@ import { useState, useEffect } from 'react';
 import axios from 'axios';
 import CardProject from "../../../content/projects/CardProject";
 import TopMenu from "../../TopMenu";
-import { Grid } from '@mui/material';
+import Grid from '@mui/material/Unstable_Grid2';
+import { Box } from '@mui/material';
 
 export default function Home() {
     const [projects, setProjects] = useState([]);
@@ -20,13 +21,20 @@ export default function Home() {
     return (
         <>
             <TopMenu />
-            <Grid container spacing={3} style={{ marginTop: '10px', marginLeft: '20px' }}>
-                {projects.map(project => (
-                    <Grid item xs={12} sm={6} md={4} lg={3} key={project.id}>
-                        <CardProject title={project.titulo} description={project.descripcion} created_at={project.fecha_creacion} githuburl={project.githubproj} creator_name={project.nombre + " " + project.apellido} />
-                    </Grid>
-                ))}
-            </Grid>
+            <Box
+                display="flex"
+                justifyContent="center"
+                alignItems="center"
+                style={{ marginTop: '20px' }}
+            >
+                <Grid container columns={{ sm: 12, lg: 10 }} rowSpacing={3} columnSpacing={{ xs: 1, sm: 2, md: 2 }} style={{ marginTop: '20px', width: '90%' }}>
+                    {projects.map(project => (
+                        <Grid item xs={12} sm={6} md={4} lg={2} key={project.id} display='flex' justifyContent='center' >
+                            <CardProject title={project.titulo} description={project.descripcion} created_at={project.fecha_creacion} githuburl={project.githubproj} creator_name={project.nombre + " " + project.apellido} />
+                        </Grid>
+                    ))}
+                </Grid>
+            </Box>
         </>
     )
 }
