@@ -9,7 +9,7 @@ import Typography from '@mui/material/Typography';
 import ReadMoreIcon from '@mui/icons-material/ReadMore';
 import GitHubIcon from '@mui/icons-material/GitHub';
 import PropTypes from 'prop-types';
-import { Box, Modal } from '@mui/material';
+import { Box, Button, Modal } from '@mui/material';
 
 const ReadMore = styled((props) => {
   const { ...other } = props;
@@ -83,6 +83,7 @@ export default function CardProject({ title, description, created_at, creator_na
           <Typography id="modal-modal-description" sx={{ mt: 2 }}>
             {description}
           </Typography>
+          <Button>Unirme al proyecto</Button>
         </Box>
       </Modal>
     </Card>
