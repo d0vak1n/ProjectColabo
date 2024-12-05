@@ -4,9 +4,15 @@ import CardProject from "../../../content/projects/CardProject";
 import TopMenu from "../../TopMenu";
 import Grid from '@mui/material/Unstable_Grid2';
 import { Box } from '@mui/material';
+import FloatingButton from '../../menucomponents/FloatingButton';
+import ModalNuevoProyecto from '../../../content/projects/ModalNuevoProyecto';
 
 export default function Home() {
     const [projects, setProjects] = useState([]);
+    const [openModalNuevoProyecto, setOpenModalNuevoProyecto] = useState(false);
+
+    const handleOpen = () => setOpenModalNuevoProyecto(true);
+    const handleClose = () => setOpenModalNuevoProyecto(false);
 
     useEffect(() => {
         axios.get('http://localhost:5000/projects')
@@ -17,6 +23,10 @@ export default function Home() {
                 console.error('Error:', error);
             });
     }, []);
+
+    const abrirModalNuevoProyecto = () => {
+        handleOpen();
+    }
 
     return (
         <>
@@ -35,6 +45,8 @@ export default function Home() {
                     ))}
                 </Grid>
             </Box>
+            <ModalNuevoProyecto open={openModalNuevoProyecto} handleClose={handleClose} />
+            <FloatingButton onClick={abrirModalNuevoProyecto} />
         </>
     )
 }
