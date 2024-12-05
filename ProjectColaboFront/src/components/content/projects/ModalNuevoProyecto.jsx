@@ -2,6 +2,8 @@ import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import Modal from '@mui/material/Modal';
 import PropTypes from 'prop-types';
+import { Button, TextField } from '@mui/material';
+import { useState } from 'react';
 
 const style = {
     position: 'absolute',
@@ -16,6 +18,17 @@ const style = {
 };
 
 export default function ModalNuevoProyecto(props) {
+    const [titulo, setTitulo] = useState('');
+    const [descripcion, setDescripcion] = useState('');
+    const [githubproj, setGithubproj] = useState('');
+
+
+    const handleSubmit = (event) => {
+        event.preventDefault();
+        // Aquí puedes manejar el envío del formulario, por ejemplo, enviando los datos a una API
+        console.log({ titulo, descripcion, githubproj });
+        props.handleClose();
+    };
 
     return (
         <div>
@@ -26,12 +39,40 @@ export default function ModalNuevoProyecto(props) {
                 aria-describedby="modal-modal-description"
             >
                 <Box sx={style}>
-                    <Typography id="modal-modal-title" variant="h6" component="h2">
-                        Text in a modal
-                    </Typography>
-                    <Typography id="modal-modal-description" sx={{ mt: 2 }}>
-                        Duis mollis, est non commodo luctus, nisi erat porttitor ligula.
-                    </Typography>
+                    <form onSubmit={handleSubmit}>
+                        <Typography variant="h6" component="h2">
+                            Añadir nuevo proyecto
+                        </Typography>
+                        <TextField
+                            fullWidth
+                            label="Título"
+                            value={titulo}
+                            onChange={(e) => setTitulo(e.target.value)}
+                            margin="normal"
+                            required
+                        />
+                        <TextField
+                            fullWidth
+                            label="Descripción"
+                            value={descripcion}
+                            onChange={(e) => setDescripcion(e.target.value)}
+                            margin="normal"
+                            multiline
+                            rows={4}
+                            required
+                        />
+                        <TextField
+                            fullWidth
+                            label="Link de GitHub"
+                            value={githubproj}
+                            onChange={(e) => setGithubproj(e.target.value)}
+                            margin="normal"
+                            required
+                        />
+                        <Button type="submit" variant="contained" color="primary">
+                            Crear Proyecto
+                        </Button>
+                    </form>
                 </Box>
             </Modal>
         </div>
