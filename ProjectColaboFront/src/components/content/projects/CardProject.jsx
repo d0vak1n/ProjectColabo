@@ -31,11 +31,13 @@ export default function CardProject({ title, description, created_at, creator_na
 
   const shortDescription = description.substring(0, 50);
 
+  const formattedDate = new Date(created_at).toLocaleDateString();
+
   return (
     <Card sx={{ maxWidth: 345 }}>
       <CardHeader
         title={title}
-        subheader={created_at}
+        subheader={formattedDate}
       />
       <CardContent>
         <Typography variant="body2" color="text.secondary">
