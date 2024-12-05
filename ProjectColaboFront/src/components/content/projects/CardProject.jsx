@@ -4,14 +4,14 @@ import Card from '@mui/material/Card';
 import CardHeader from '@mui/material/CardHeader';
 import CardContent from '@mui/material/CardContent';
 import CardActions from '@mui/material/CardActions';
-import Collapse from '@mui/material/Collapse';
 import IconButton from '@mui/material/IconButton';
 import Typography from '@mui/material/Typography';
-import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
+import ReadMoreIcon from '@mui/icons-material/ReadMore';
 import GitHubIcon from '@mui/icons-material/GitHub';
 import PropTypes from 'prop-types';
+import { Box, Modal } from '@mui/material';
 
-const ExpandMore = styled((props) => {
+const ReadMore = styled((props) => {
   const { ...other } = props;
   return <IconButton {...other} />;
 })(({ theme, expand }) => ({
@@ -22,10 +22,22 @@ const ExpandMore = styled((props) => {
   }),
 }));
 
+const style = {
+  position: 'absolute',
+  top: '50%',
+  left: '50%',
+  transform: 'translate(-50%, -50%)',
+  maxWidth: 900,
+  bgcolor: 'background.paper',
+  border: '2px solid #000',
+  boxShadow: 24,
+  p: 4,
+};
+
 export default function CardProject({ title, description, created_at, creator_name, githuburl }) {
   const [expanded, setExpanded] = React.useState(false);
 
-  const handleExpandClick = () => {
+  const handleOpenClick = () => {
     setExpanded(!expanded);
   };
 
@@ -48,24 +60,31 @@ export default function CardProject({ title, description, created_at, creator_na
         </Typography>
       </CardContent>
       <CardActions disableSpacing>
-        <IconButton href={githuburl} target="_blank" aria-label="add to favorites">
+        <IconButton href={githuburl} target="_blank" aria-label="github link">
           <GitHubIcon />
         </IconButton>
-        <ExpandMore
-          expand={expanded}
-          onClick={handleExpandClick}
-          aria-expanded={expanded}
+        <ReadMore
+          onClick={handleOpenClick}
           aria-label="show more"
         >
-          <ExpandMoreIcon />
-        </ExpandMore>
+          <ReadMoreIcon />
+        </ReadMore>
       </CardActions>
-      <Collapse in={expanded} timeout="auto" unmountOnExit>
-        <CardContent>
-          <Typography paragraph>Descripción del proyecto:</Typography>
-          {description}
-        </CardContent>
-      </Collapse>
+      <Modal
+        open={expanded}
+        onClose={handleOpenClick}
+        aria-labelledby="modal-modal-title"
+        aria-describedby="modal-modal-description"
+      >
+        <Box sx={style}>
+          <Typography id="modal-modal-title" variant="h6" component="h2">
+            Descripcion del proyecto
+          </Typography>
+          <Typography id="modal-modal-description" sx={{ mt: 2 }}>
+            {description}
+          </Typography>
+        </Box>
+      </Modal>
     </Card>
   );
 }
