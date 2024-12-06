@@ -1,0 +1,15 @@
+import axios from "axios";
+
+const SERVER = 'http://localhost:5000';
+
+const ENDPOINTS = {
+    login: `${SERVER}/login`,
+    register: `${SERVER}/register`
+}
+
+export function login(email, password) {
+    return axios.post(ENDPOINTS.login, { email, password });
+}
+export function register(userdata) {
+    return axios.post(ENDPOINTS.register, userdata);
+}

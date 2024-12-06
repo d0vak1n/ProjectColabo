@@ -1,12 +1,12 @@
 import { useState } from 'react';
 import { TextField, Button, Typography, Grid, Box, Avatar, FormControlLabel, Checkbox } from '@mui/material';
-import axios from 'axios';
 import { Link, useNavigate } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Paper from '@mui/material/Paper';
 import backgroundImage from '../../assets/loginbackground.jpg';
 import { Copyright } from '../content/utils/Copyright';
+import { login } from '../../utils/endpoints';
 
 const Login = ({ setToken }) => {
   const [email, setEmail] = useState('');
@@ -33,7 +33,7 @@ const Login = ({ setToken }) => {
     }
 
     try {
-      const response = await axios.post('http://localhost:5000/login', { email, password });
+      const response = await login(email, password);
       const token = response.data.token;
       document.cookie = `token=${token}; path=/`;
       setToken(token)

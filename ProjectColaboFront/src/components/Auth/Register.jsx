@@ -1,9 +1,9 @@
 import { useState } from 'react';
 import { TextField, Button, Container, Grid, Link, Typography, Box, Avatar, FormControlLabel, Checkbox, Tooltip } from '@mui/material';
-import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import { Copyright } from '../content/utils/Copyright';
+import { register } from '../../utils/endpoints';
 
 const Register = () => {
   const [email, setEmail] = useState('');
@@ -62,8 +62,7 @@ const Register = () => {
 
     try {
       const userData = { email, password, firstName, lastName, linkedin, github };
-      console.log(userData); // Log the user data
-      const response = await axios.post('http://localhost:5000/register', userData);
+      const response = await register(userData);
       console.log(response.data); // Log the response data
       alert('Usuario registrado correctamente');
     } catch (error) {
