@@ -3,7 +3,8 @@ import Typography from '@mui/material/Typography';
 import Modal from '@mui/material/Modal';
 import PropTypes from 'prop-types';
 import { Button, TextField } from '@mui/material';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
+import { checkGithubLink } from '../../../utils/utils';
 
 const style = {
     position: 'absolute',
@@ -21,13 +22,39 @@ export default function ModalNuevoProyecto(props) {
     const [titulo, setTitulo] = useState('');
     const [descripcion, setDescripcion] = useState('');
     const [githubproj, setGithubproj] = useState('');
+    const [errors, setErrors] = useState({});
 
+    useEffect(() => {
+        setTitulo('');
+        setDescripcion('');
+        setGithubproj('');
+        setErrors({});
+    }, [props.open]);
+
+    const validate = () => {
+        const newErrors = {};
+        if (titulo.length > 25) {
+            newErrors.titulo = 'El título no puede tener más de 25 caracteres';
+        }
+        if (descripcion.length < 100) {
+            newErrors.descripcion = 'La descripción debe tener al menos 100 caracteres';
+        }
+        if (!checkGithubLink(githubproj)) {
+            newErrors.githubproj = 'El link de GitHub no es válido';
+        }
+        return newErrors;
+    };
 
     const handleSubmit = (event) => {
         event.preventDefault();
-        // Aquí puedes manejar el envío del formulario, por ejemplo, enviando los datos a una API
-        console.log({ titulo, descripcion, githubproj });
-        props.handleClose();
+        const validationErrors = validate();
+        if (Object.keys(validationErrors).length > 0) {
+            setErrors(validationErrors);
+        } else {
+            // Aquí puedes manejar el envío del formulario, por ejemplo, enviando los datos a una API
+            console.log({ titulo, descripcion, githubproj });
+            props.handleClose();
+        }
     };
 
     return (
@@ -50,6 +77,9 @@ export default function ModalNuevoProyecto(props) {
                             onChange={(e) => setTitulo(e.target.value)}
                             margin="normal"
                             required
+                            inputProps={{ maxLength: 25 }}
+                            error={!!errors.titulo}
+                            helperText={errors.titulo}
                         />
                         <TextField
                             fullWidth
@@ -60,6 +90,8 @@ export default function ModalNuevoProyecto(props) {
                             multiline
                             rows={4}
                             required
+                            error={!!errors.descripcion}
+                            helperText={errors.descripcion}
                         />
                         <TextField
                             fullWidth
@@ -68,6 +100,8 @@ export default function ModalNuevoProyecto(props) {
                             onChange={(e) => setGithubproj(e.target.value)}
                             margin="normal"
                             required
+                            error={!!errors.githubproj}
+                            helperText={errors.githubproj}
                         />
                         <Button type="submit" variant="contained" color="primary">
                             Crear Proyecto
