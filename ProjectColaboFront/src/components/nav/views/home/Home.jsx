@@ -1,11 +1,11 @@
 import { useState, useEffect } from 'react';
-import axios from 'axios';
 import CardProject from "../../../content/projects/CardProject";
 import TopMenu from "../../TopMenu";
 import Grid from '@mui/material/Unstable_Grid2';
 import { Box } from '@mui/material';
 import FloatingButton from '../../menucomponents/FloatingButton';
 import ModalNuevoProyecto from '../../../content/projects/ModalNuevoProyecto';
+import { getProjects } from '../../../../utils/endpoints';
 
 export default function Home() {
     const [projects, setProjects] = useState([]);
@@ -15,7 +15,7 @@ export default function Home() {
     const handleClose = () => setOpenModalNuevoProyecto(false);
 
     useEffect(() => {
-        axios.get('http://localhost:5000/projects')
+        getProjects()
             .then(response => {
                 setProjects(response.data);
             })
