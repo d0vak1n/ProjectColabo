@@ -3,18 +3,7 @@ import { TextField, Button, Container, Grid, Link, Typography, Box, Avatar, Form
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
-
-function Copyright(props) {
-  return (
-    <Typography variant="body2" color="text.secondary" align="center" {...props}>
-      {'Copyright © '}
-      ProjectColabo
-      {' '}
-      {new Date().getFullYear()}
-      {'.'}
-    </Typography>
-  );
-}
+import { Copyright } from '../content/utils/Copyright';
 
 const Register = () => {
   const [email, setEmail] = useState('');

@@ -6,18 +6,7 @@ import PropTypes from 'prop-types';
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Paper from '@mui/material/Paper';
 import backgroundImage from '../../assets/loginbackground.jpg';
-
-function Copyright(props) {
-  return (
-    <Typography variant="body2" color="text.secondary" align="center" {...props}>
-      {'Copyright © '}
-      ProjectColabo
-      {' '}
-      {new Date().getFullYear()}
-      {'.'}
-    </Typography>
-  );
-}
+import { Copyright } from '../content/utils/Copyright';
 
 const Login = ({ setToken }) => {
   const [email, setEmail] = useState('');
