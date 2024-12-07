@@ -12,17 +12,17 @@ function App() {
 
   useEffect(() => {
     setToken(Cookies.get('token'));
-  } , []);
+  }, []);
 
   return (
     <>
-        <Routes>
-          <Route path="/" element={token ? <Home /> : <Navigate to="/login" />} />
-          <Route path="/login" element={<Login setToken={setToken} />} />
-          <Route path="/register" element={<Register />} />
-          <Route path="/perfil" element={token ? <Profile /> : <Navigate to="/login" />} />
-          <Route path="*" element={<RouteError />} />
-        </Routes>
+      <Routes>
+        <Route path="/" element={token ? <Home /> : <Navigate to="/login" />} />
+        <Route path="/login" element={<Login setToken={setToken} />} />
+        <Route path="/register" element={<Register />} />
+        <Route path="/perfil" element={token ? <Profile /> : <Navigate to="/login" />} />
+        <Route path="*" element={<RouteError />} />
+      </Routes>
     </>
   )
 }
