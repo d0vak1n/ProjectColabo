@@ -16,6 +16,7 @@ import Notifications from './menuComponents/Notifications';
 import UserBadge from './menuComponents/UserBadge';
 import SearchBar from './menuComponents/SearchBar';
 import ShowNavButton from './menuComponents/ShowNavButton';
+import { Link } from 'react-router-dom';
 
 export default function TopMenu() {
   const [anchorEl, setAnchorEl] = React.useState(null);
@@ -58,8 +59,8 @@ export default function TopMenu() {
       open={isMenuOpen}
       onClose={handleMenuClose}
     >
-      <MenuItem onClick={handleMenuClose}>Profile</MenuItem>
-      <MenuItem onClick={handleMenuClose}>My account</MenuItem>
+      <MenuItem component={Link} to="/perfil">Perfil</MenuItem>
+      <MenuItem onClick={handleMenuClose}>Cerrar sesión</MenuItem>
     </Menu>
   );
 
@@ -86,7 +87,7 @@ export default function TopMenu() {
             <MailIcon />
           </Badge>
         </IconButton>
-        <p>Messages</p>
+        <p>Mensajes</p>
       </MenuItem>
       <MenuItem>
         <IconButton
@@ -98,7 +99,7 @@ export default function TopMenu() {
             <NotificationsIcon />
           </Badge>
         </IconButton>
-        <p>Notifications</p>
+        <p>Notifificaciones</p>
       </MenuItem>
       <MenuItem onClick={handleProfileMenuOpen}>
         <IconButton
@@ -110,7 +111,7 @@ export default function TopMenu() {
         >
           <AccountCircle />
         </IconButton>
-        <p>Profile</p>
+        <p>Perfil</p>
       </MenuItem>
     </Menu>
   );
