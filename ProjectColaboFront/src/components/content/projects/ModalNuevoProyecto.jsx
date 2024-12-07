@@ -5,7 +5,7 @@ import PropTypes from 'prop-types';
 import { Button, TextField } from '@mui/material';
 import { useEffect, useState } from 'react';
 import { checkGithubLink } from '../../../utils/utils';
-import { createProject } from '../../../utils/endpoints';
+import { createProject, getProfile } from '../../../utils/endpoints';
 
 const style = {
     position: 'absolute',
@@ -24,6 +24,33 @@ export default function ModalNuevoProyecto(props) {
     const [descripcion, setDescripcion] = useState('');
     const [githubproj, setGithubproj] = useState('');
     const [errors, setErrors] = useState({});
+    const [user, setUser] = useState({});
+
+    useEffect(() => {
+        const token = document.cookie.split(';').find(cookie => cookie.trim().startsWith('token=')).split('=')[1];
+        if (token === null) {
+            console.log('Token is null');
+            history.push('/');
+            return;
+        }
+        getProfile(token)
+            .then((response) => {
+                setUser(response.data);
+            })
+            .catch((error) => {
+                if (error.response) {
+                    console.log(error.response.data);
+                    console.log(error.response.status);
+                } else if (error.request) {
+                    // La solicitud fue hecha pero no se recibió ninguna respuesta
+                    console.log(error.request);
+                } else {
+                    // Algo sucedió en la configuración de la solicitud que provocó un error
+                    console.log('Error', error.message);
+                }
+                console.log(error.config);
+            })
+    }, []);
 
     useEffect(() => {
         setTitulo('');
@@ -57,8 +84,8 @@ export default function ModalNuevoProyecto(props) {
                     titulo,
                     descripcion,
                     githubproj,
-                    fecha_creacion: new Date().toISOString().slice(0, 19).replace('T', ' '), // TODO chequear si es necesario
-                    creador_id: 666 // TODO cambiar a dinámico
+                    fecha_creacion: new Date().toISOString().slice(0, 19).replace('T', ' '), // TODO mover al backend
+                    creador_id: user.id // TODO cambiar a dinámico
                 };
                 const response = await createProject(projectData);
                 console.log(response);
