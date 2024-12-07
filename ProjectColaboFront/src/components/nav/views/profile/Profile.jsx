@@ -2,6 +2,7 @@ import TopMenu from "../../TopMenu"
 import { useState, useEffect } from 'react';
 import axios from 'axios';
 import { Link, Typography } from "@mui/material";
+import { getProfile } from "../../../../utils/endpoints";
 
 export default function Profile() {
     const [userData, setUserData] = useState({});
@@ -12,11 +13,7 @@ export default function Profile() {
             console.log('Token is null');
             return;
         }
-        axios.get('http://localhost:5000/profile', {
-            headers: {
-                'Authorization': `Bearer ${token}`
-            }
-        })
+        getProfile(token)
             .then((response) => {
                 setUserData(response.data);
             })

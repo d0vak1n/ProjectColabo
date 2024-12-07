@@ -6,7 +6,8 @@ const ENDPOINTS = {
     login: `${SERVER}/login`,
     register: `${SERVER}/register`,
     projects: `${SERVER}/projects`,
-    newProject: `${SERVER}/projects/new`
+    newProject: `${SERVER}/projects/new`,
+    getProfile: `${SERVER}/profile`
 }
 
 export function login(email, password) {
@@ -20,4 +21,11 @@ export function getProjects() {
 }
 export function createProject(project) {
     return axios.post(ENDPOINTS.newProject, project);
+}
+export function getProfile(token) {
+    return axios.get(ENDPOINTS.getProfile, {
+        headers: {
+            'Authorization': `Bearer ${token}`
+        }
+    });
 }
