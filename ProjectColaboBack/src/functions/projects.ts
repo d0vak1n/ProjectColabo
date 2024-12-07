@@ -12,9 +12,9 @@ const getProjects = (req: Request, res: Response): void => {
 };
 
 const createProject = (req: Request, res: Response): void => {
-    const { title, description, technologies, github, url } = req.body;
+    const { titulo, descripcion, githubproj, fecha_creacion, creador_id } = req.body;
 
-    db.query('INSERT INTO proyectos SET ?', { title, description, technologies, github, url }, (error, results) => {
+    db.query('INSERT INTO proyectos SET ?', { titulo, descripcion, githubproj, fecha_creacion, creador_id }, (error, results) => {
         if (error) {
             console.log(error);
             return res.status(500).send('Error al insertar el proyecto');

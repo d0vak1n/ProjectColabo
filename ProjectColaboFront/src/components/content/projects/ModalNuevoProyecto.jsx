@@ -5,6 +5,7 @@ import PropTypes from 'prop-types';
 import { Button, TextField } from '@mui/material';
 import { useEffect, useState } from 'react';
 import { checkGithubLink } from '../../../utils/utils';
+import { createProject } from '../../../utils/endpoints';
 
 const style = {
     position: 'absolute',
@@ -45,15 +46,31 @@ export default function ModalNuevoProyecto(props) {
         return newErrors;
     };
 
-    const handleSubmit = (event) => {
+    const handleSubmit = async (event) => {
         event.preventDefault();
         const validationErrors = validate();
         if (Object.keys(validationErrors).length > 0) {
             setErrors(validationErrors);
         } else {
-            // Aquí puedes manejar el envío del formulario, por ejemplo, enviando los datos a una API
-            console.log({ titulo, descripcion, githubproj });
-            props.handleClose();
+            try {
+                const projectData = {
+                    titulo,
+                    descripcion,
+                    githubproj,
+                    fecha_creacion: new Date().toISOString().slice(0, 19).replace('T', ' '), // TODO chequear si es necesario
+                    creador_id: 666 // TODO cambiar a dinámico
+                };
+                const response = await createProject(projectData);
+                console.log(response);
+                if (response.status === 201) {
+                    console.log('Proyecto insertado correctamente');
+                    props.handleClose();
+                } else {
+                    console.error('Error al insertar el proyecto');
+                }
+            } catch (error) {
+                console.error('Error al insertar el proyecto', error);
+            }
         }
     };
 
