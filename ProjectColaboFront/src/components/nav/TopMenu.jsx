@@ -17,6 +17,7 @@ import UserBadge from './menuComponents/UserBadge';
 import SearchBar from './menuComponents/SearchBar';
 import ShowNavButton from './menuComponents/ShowNavButton';
 import { Link } from 'react-router-dom';
+import { cerrarSesion } from '../../utils/utils';
 
 export default function TopMenu() {
   const [anchorEl, setAnchorEl] = React.useState(null);
@@ -42,6 +43,10 @@ export default function TopMenu() {
     setMobileMoreAnchorEl(event.currentTarget);
   };
 
+  const handleCerrarSesion = () => {
+    cerrarSesion();
+  }
+
   const menuId = 'primary-search-account-menu';
   const renderMenu = (
     <Menu
@@ -60,7 +65,7 @@ export default function TopMenu() {
       onClose={handleMenuClose}
     >
       <MenuItem component={Link} to="/perfil">Perfil</MenuItem>
-      <MenuItem onClick={handleMenuClose}>Cerrar sesión</MenuItem>
+      <MenuItem component={Link} to="/login" onClick={handleCerrarSesion}>Cerrar sesión</MenuItem>
     </Menu>
   );
 
