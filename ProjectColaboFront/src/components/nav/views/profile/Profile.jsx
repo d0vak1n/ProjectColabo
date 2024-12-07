@@ -51,7 +51,8 @@ export default function Profile() {
                 <Card
                     sx={{
                         maxWidth: '500px',
-                        width: '100%',
+                        minWidth: '100px',
+                        width: 'auto',
                         boxShadow: 3,
                         padding: 3,
                         borderRadius: 2,
