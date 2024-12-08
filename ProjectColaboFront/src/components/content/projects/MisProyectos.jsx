@@ -11,7 +11,7 @@ export default function MisProyectos(props) {
     useEffect(() => {
         getProjects()
             .then(response => {
-                setProjects(response.data);
+                setProjects(response);
             })
             .catch(error => {
                 console.error('Error:', error);

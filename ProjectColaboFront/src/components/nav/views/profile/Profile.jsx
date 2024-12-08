@@ -15,12 +15,11 @@ export default function Profile() {
         }
         getProfile(token)
             .then((response) => {
-                setUserData(response.data);
+                setUserData(response);
             })
             .catch((error) => {
                 if (error.response) {
-                    console.log(error.response.data);
-                    console.log(error.response.status);
+                    console.log(error.response);
                 } else if (error.request) {
                     // La solicitud fue hecha pero no se recibió ninguna respuesta
                     console.log(error.request);

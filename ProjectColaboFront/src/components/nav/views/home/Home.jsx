@@ -17,7 +17,7 @@ export default function Home() {
     useEffect(() => {
         getProjects()
             .then(response => {
-                setProjects(response.data);
+                setProjects(response);
             })
             .catch(error => {
                 console.error('Error:', error);

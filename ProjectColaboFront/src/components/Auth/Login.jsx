@@ -34,7 +34,7 @@ const Login = ({ setToken }) => {
 
     try {
       const response = await login(email, password);
-      const token = response.data.token;
+      const token = response.token;
       document.cookie = `token=${token}; path=/`;
       setToken(token)
       navigate('/');

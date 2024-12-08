@@ -1,5 +1,3 @@
-import axios from "axios";
-
 const SERVER = 'http://localhost:5000';
 
 const ENDPOINTS = {
@@ -10,22 +8,75 @@ const ENDPOINTS = {
     getProfile: `${SERVER}/profile`
 }
 
-export function login(email, password) {
-    return axios.post(ENDPOINTS.login, { email, password });
-}
-export function register(userdata) {
-    return axios.post(ENDPOINTS.register, userdata);
-}
-export function getProjects() {
-    return axios.get(ENDPOINTS.projects);
-}
-export function createProject(project) {
-    return axios.post(ENDPOINTS.newProject, project);
-}
-export function getProfile(token) {
-    return axios.get(ENDPOINTS.getProfile, {
+export async function login(email, password) {
+    const response = await fetch(ENDPOINTS.login, {
+        method: 'POST',
         headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ email, password })
+    });
+    return response.json();
+}
+export async function register(userdata) {
+    const response = await fetch(ENDPOINTS.register, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(userdata)
+    });
+    const contentType = response.headers.get('content-type');
+    if (contentType && contentType.includes('application/json')) {
+        return response.json();
+    } else {
+        const text = await response.text();
+        if (response.ok) {
+            return { message: text };
+        } else {
+            throw new Error(text);
+        }
+    }
+}
+
+export async function getProjects() {
+    const response = await fetch(ENDPOINTS.projects, {
+        method: 'GET',
+        headers: {
+            'Content-Type': 'application/json'
+        }
+    });
+    return response.json();
+}
+
+export async function createProject(project) {
+    const response = await fetch(ENDPOINTS.newProject, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(project)
+    });
+    const contentType = response.headers.get('content-type');
+    if (contentType && contentType.includes('application/json')) {
+        return response.json();
+    } else {
+        const text = await response.text();
+        if (response.ok) {
+            return { message: text, status: 201 };
+        } else {
+            throw new Error(text);
+        }
+    }
+}
+
+export async function getProfile(token) {
+    const response = await fetch(ENDPOINTS.getProfile, {
+        method: 'GET',
+        headers: {
+            'Content-Type': 'application/json',
             'Authorization': `Bearer ${token}`
         }
     });
+    return response.json();
 }

@@ -35,12 +35,11 @@ export default function ModalNuevoProyecto(props) {
         }
         getProfile(token)
             .then((response) => {
-                setUser(response.data);
+                setUser(response);
             })
             .catch((error) => {
                 if (error.response) {
-                    console.log(error.response.data);
-                    console.log(error.response.status);
+                    console.log(error.response);
                 } else if (error.request) {
                     // La solicitud fue hecha pero no se recibió ninguna respuesta
                     console.log(error.request);
@@ -85,7 +84,7 @@ export default function ModalNuevoProyecto(props) {
                     descripcion,
                     githubproj,
                     fecha_creacion: new Date().toISOString().slice(0, 19).replace('T', ' '), // TODO mover al backend
-                    creador_id: user.id // TODO cambiar a dinámico
+                    creador_id: user.id
                 };
                 const response = await createProject(projectData);
                 console.log(response);

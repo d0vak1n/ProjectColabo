@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { TextField, Button, Container, Grid, Link, Typography, Box, Avatar, FormControlLabel, Checkbox, Tooltip } from '@mui/material';
+import { TextField, Button, Container, Grid, Link, Typography, Box, Avatar, FormControlLabel, Checkbox, Tooltip, responsiveFontSizes } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import { Copyright } from '../content/utils/Copyright';
@@ -63,10 +63,11 @@ const Register = () => {
     try {
       const userData = { email, password, firstName, lastName, linkedin, github };
       const response = await register(userData);
-      console.log(response.data); // Log the response data
+      console.log(response);
       alert('Usuario registrado correctamente');
     } catch (error) {
-      alert(`¡Error en el registro! ${error.response.data}`);
+      console.error('Error en el registro:', error);
+      alert(`¡Error en el registro! ${error.message || error}`);
     }
   };
 
