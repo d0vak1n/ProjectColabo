@@ -10,6 +10,9 @@ dotenv.config();
 const register = async (req: Request, res: Response): Promise<void> => {
   const { email, password, firstName, lastName, linkedin, github } = req.body;
 
+  console.log(req.body);
+
+
   db.query('SELECT * FROM estudiantes WHERE email = ?', [email], async (error: any, results: any) => {
     if (error) {
       console.log(error);
